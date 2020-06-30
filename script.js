@@ -1,77 +1,65 @@
-// Your calculator is going to contain functions for all of the basic math operators you typically find on simple calculators,
-// so start by creating functions for the following items and testing them in your browser’s console.
+let displayValue = "";
+let calcString = "";
+let num1;
+let operatorVariable;
+let currentValue;
 
-// add
-// subtract
-// multiply
-// divide
+allNumbers();
+chooseOperator();
+equalize();
+clearMe();
 
-function simpleAdd(a,b) {
-    return a + b;
+const display = document.querySelector('#display');
+display.textContent = "0";
+
+// Function for basic math operations
+
+function simpleAdd(num1,num2) {
+    return num1 + num2;
 };
 
-function simpleSubtract (a,b) {
-    return a - b;
+function simpleSubtract (num1,num2) {
+    return num1 - num2;
 };
 
-function simpleMultiply (a,b) {
-    return a * b;
+function simpleMultiply (num1,num2) {
+    return num1 * num2;
 };
 
-function simpleDivide (a,b) {
-    return a / b;
+function simpleDivide (num1,num2) {
+    return num1 / num2;
 };
 
-// Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
+// Function that triggers math operation with provided operator value and user inputted numbers
 
-function operate(operator, a, b) {
-    if (operator == "+") {
-        return simpleAdd(a,b);
-    } else if (operator == "-") {
-        return simpleSubtract(a,b);
-    } else if (operator == "*") {
-        return simpleMultiply(a,b);
-    } else if (operator == "/") {
-        return simpleDivide(a,b);
+function operate(operatorVariable, num1, num2) {
+    if (operatorVariable == "+") {
+        return simpleAdd(num1,num2);
+    } else if (operatorVariable == "-") {
+        return simpleSubtract(num1,num2);
+    } else if (operatorVariable == "*") {
+        return simpleMultiply(num1,num2);
+    } else if (operatorVariable == "/") {
+        return simpleDivide(num1,num2);
     };
 };
 
-//Create the functions that populate the display when you click the number buttons… 
-// you should be storing the ‘display value’ in a variable somewhere for use in the next step.
-
-let displayValue = "";
-
-function populateDisplay(displayValue) {
-  const display = document.querySelector('#display');
-  display.textContent = displayValue;
-};
-
-//function to change displayValue from clicking number buttons..
-
-// function changeDisplay() {
-//   const numButton = document.querySelector('#one');
-//   numButton.addEventListener('click', event => {
-//     populateDisplay(1);
-//   });
-// };
+// Initializes numbers into click events for adding to calcString variable
 
 function allNumbers() {
   const fullNums = document.querySelectorAll('.num');
   fullNums.forEach(fullNums => {
-    fullNums.addEventListener('click', specialClick)
+    fullNums.addEventListener('click', numClick)
   });
 };
 
-function specialClick(e) {
-  displayNum = Number(e.target.textContent);
-  console.log(displayNum);
-  displayValue = displayValue.toString() + displayNum.toString()
-  //display.textContent = parseInt(displayValue);
-  display.textContent = displayValue;
+function numClick(e) {
+  calcString += Number(e.target.textContent);
+  console.log(calcString);
+  display.textContent = calcString;
 };
 
-// Make the calculator work! You’ll need to store the first number that is input into the calculator when a user presses an operator,
-// and also save which operation has been chosen and then operate() on them when the user presses the “=” key.
+// Functions to initialize operator click event and to store operator value
 
 function chooseOperator() {
   const operButtons = document.querySelectorAll('.oper');
@@ -81,13 +69,24 @@ function chooseOperator() {
 };
 
 function operatorClick(e) {
-    displayOper = e.target.textContent;
-    console.log(displayOper);
-    displayValue = displayValue + displayOper;
-    display.textContent = displayValue;
-}
+  if (operatorVariable == undefined) {
+    operatorVariable = e.target.textContent;
+    num1 = Number(calcString);
+    calcString = "";
+    console.log(operatorVariable);
+    console.log(num1);
+    console.log(calcString);
+  } else {
+      currentValue = operate(operatorVariable, num1, Number(calcString));
+      display.textContent = currentValue;
+      operatorVariable = e.target.textContent;
+      num1 = currentValue;
+      calcString = "";
+      console.log(operatorVariable);  
+    }
+};
 
-// Equals
+// Functions to initialize equal click event and to trigger operate function with provided variables
 
 function equalize() {
   const equalButton = document.querySelector('#equals');
@@ -95,18 +94,36 @@ function equalize() {
 };
 
 function equalsClick() {
-  equalOper = "=";
-  console.log(equalOper);
-  console.log(displayValue.split(""))
-  displayValue = displayValue + equalOper;
-  result = displayValue.split("");
-  console.log(result);
-  display.textContent = displayValue;
-
+  currentValue = operate(operatorVariable, num1, Number(calcString));
+  display.textContent = currentValue;
+  console.log(currentValue);
+  operatorVariable = "";
+  num1 = "";
+  calcString = Number(currentValue);
 }
 
+// Function to initialize clear button event and trigger clears function to reset everything
 
-// Think you might need to use reduce adn rethink original functions for operations. Also the equalize could just go right to 
-// solving the problem and spitting it out.
+function clearMe() {
+  const clearButton = document.querySelector('#clears');
+  clearButton.addEventListener('click', clearsClick);
+};
 
+function clearsClick() {
+  display.textContent = "0";
+  operatorVariable = undefined;
+  num1 = "";
+  calcString = "";
+}
 
+// First, ask in Discord if you need to follow order of operations or not?
+
+// Need to make it continue working after equals using existing value
+
+// Repeating equals = should continue to add to result with previous operation?
+
+// Problem is the if else statements in operator click. Think about start of calculator from reloaded page. Then think about start of new calculation with pre-existing
+// values from an equals =.
+
+// Instead of showing the operator in the display. How about like online-calculator app, you keep the operator button highlighted? Once
+// a second number is selected after the operator, turn off the highlighted operator button. 
