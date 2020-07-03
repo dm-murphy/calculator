@@ -1,13 +1,17 @@
-let displayValue = "";
 let calcString = "";
 let num1;
 let operatorVariable;
 let currentValue;
+let decimalStatus;
+let backString;
 
 allNumbers();
 chooseOperator();
 equalize();
 clearMe();
+decimalize();
+backSpace();
+
 
 const display = document.querySelector('#display');
 display.textContent = "0";
@@ -44,7 +48,7 @@ function operate(operatorVariable, num1, num2) {
     };
 };
 
-// Initializes numbers into click events for adding to calcString variable
+// Functions to initialize number click event and to store number value
 
 function allNumbers() {
   const fullNums = document.querySelectorAll('.num');
@@ -54,10 +58,29 @@ function allNumbers() {
 };
 
 function numClick(e) {
-  calcString += Number(e.target.textContent);
-  console.log(calcString);
-  display.textContent = calcString;
+  if (calcString.length < 15) {
+    calcString += Number(e.target.textContent);
+    console.log(calcString);
+    display.textContent = calcString;
+  };
 };
+
+// Functions to initialize backspace button and remove last number
+
+function backSpace() {
+  const backButton = document.querySelector('#backspace');
+  backButton.addEventListener('click', backClick)
+};
+
+function backClick() {
+  calcString = calcString.split("");
+  backString = calcString.pop();
+  if (backString == ".") {
+    decimalStatus = undefined;
+  };
+  calcString = calcString.join("");
+  display.textContent = calcString;
+}
 
 // Functions to initialize operator click event and to store operator value
 
@@ -73,15 +96,17 @@ function operatorClick(e) {
     operatorVariable = e.target.textContent;
     num1 = Number(calcString);
     calcString = "";
+    decimalStatus = undefined;
     console.log(operatorVariable);
     console.log(num1);
     console.log(calcString);
   } else {
       currentValue = operate(operatorVariable, num1, Number(calcString));
-      display.textContent = currentValue;
+      display.textContent = Math.round((currentValue + Number.EPSILON) * 1000) / 1000;
       operatorVariable = e.target.textContent;
       num1 = currentValue;
       calcString = "";
+      decimalStatus = undefined;
       console.log(operatorVariable);  
     }
 };
@@ -93,14 +118,71 @@ function equalize() {
   equalButton.addEventListener('click', equalsClick);
 };
 
-function equalsClick() {
-  currentValue = operate(operatorVariable, num1, Number(calcString));
-  display.textContent = currentValue;
-  console.log(currentValue);
-  operatorVariable = "";
-  num1 = "";
-  calcString = Number(currentValue);
+function equalsClick(e) {
+  if ((operatorVariable == "/") && (calcString == 0)) {
+    console.log("You want to divide by zero?");
+    display.textContent = "You want to divide by zero?";
+    disableButtons();
+  } else if (operatorVariable != undefined) {
+    currentValue = operate(operatorVariable, num1, Number(calcString));
+    display.textContent = Math.round((currentValue + Number.EPSILON) * 1000) / 1000;
+    console.log(currentValue);
+    operatorVariable = undefined;
+    num1 = "";
+    calcString = "";
+    disableButtons();
+  }
 }
+
+// Functions to initialize decimal button and activate decimal click event
+
+function decimalize() {
+  const decimalButton = document.querySelector('#decimal');
+  decimalButton.addEventListener('click', decimalClick);
+};
+
+function decimalClick(e) {
+  if (decimalStatus == undefined) {
+    calcString += e.target.textContent;
+    display.textContent = calcString;
+    decimalStatus = 1;
+  }
+}
+
+
+function disableButtons() {
+  const equalButton = document.querySelector('#equals');
+  equalButton.disabled = true;
+  const operButtons = document.querySelectorAll('.oper');
+  operButtons.forEach(operButtons => {
+    operButtons.disabled = true;
+    });
+  const fullNums = document.querySelectorAll('.num');  
+  fullNums.forEach(fullNums => {
+    fullNums.disabled = true;
+    });
+  const decimalButton = document.querySelector('#decimal');
+  decimalButton.disabled = true;
+  const backButton = document.querySelector('#backspace');
+  backButton.disabled = true;
+  }
+
+function enableButtons() {
+  const equalButton = document.querySelector('#equals');
+  equalButton.disabled = false;
+  const operButtons = document.querySelectorAll('.oper');
+  operButtons.forEach(operButtons => {
+    operButtons.disabled = false;
+    });
+  const fullNums = document.querySelectorAll('.num');  
+  fullNums.forEach(fullNums => {
+    fullNums.disabled = false;
+    });
+  const decimalButton = document.querySelector('#decimal');
+  decimalButton.disabled = false;
+  const backButton = document.querySelector('#backspace');
+  backButton.disabled = false;
+  }
 
 // Function to initialize clear button event and trigger clears function to reset everything
 
@@ -114,16 +196,14 @@ function clearsClick() {
   operatorVariable = undefined;
   num1 = "";
   calcString = "";
+  equalsStatus = undefined;
+  decimalStatus = undefined;
+  enableButtons();
 }
 
-// First, ask in Discord if you need to follow order of operations or not?
+// Add keyboard support
 
-// Need to make it continue working after equals using existing value
-
-// Repeating equals = should continue to add to result with previous operation?
-
-// Problem is the if else statements in operator click. Think about start of calculator from reloaded page. Then think about start of new calculation with pre-existing
-// values from an equals =.
+// Styling:
 
 // Instead of showing the operator in the display. How about like online-calculator app, you keep the operator button highlighted? Once
 // a second number is selected after the operator, turn off the highlighted operator button. 
