@@ -1,0 +1,8 @@
+#container {
+outline: 'solid 5px white';
+margin: 'auto';
+width: '630px';
+display: 'grid';
+grid-template-columns: 16;
+grid-template-rows: 8;
+}
