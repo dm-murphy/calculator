@@ -1,8 +1,54 @@
-#container {
-outline: 'solid 5px white';
-margin: 'auto';
-width: '630px';
-display: 'grid';
-grid-template-columns: 16;
-grid-template-rows: 8;
+/* #container {
+color: white;
+margin: auto;
+width: 630px;
+display: grid;
+grid-template-columns: 500px
+ repeat(16, 1fr);
+grid-template-rows: repeat(8, 1fr);
+} */
+
+/* .test {
+  background-color: coral;
+  outline: solid 2px black;
+  color: white;
 }
+
+#display {
+    background-color: lightgrey;
+
+} */
+
+#display {
+    grid-area: header;
+    background-color: lightgrey;
+    width: 650px;
+    margin: auto;
+  }
+.test {
+    grid-area: main;
+    background-color: coral;
+    
+    
+  }
+.oper {
+    
+    grid-area: sidebar;
+  }
+.item-d {
+    grid-area: footer;
+  }
+  
+.container {
+    display: grid;
+    
+    width: 650px;
+    margin: auto;
+    
+    grid-template-columns: 50px 50px 50px 50px;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "header header header header"
+      "main main . sidebar"
+      "footer footer footer footer";
+  }
