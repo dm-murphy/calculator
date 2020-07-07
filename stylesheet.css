@@ -1,5 +1,5 @@
 body {
-  background-color: lightskyblue;
+  background-color: #59a6ff;
 }
 
 #container {
@@ -9,6 +9,8 @@ body {
   width: 450px;
   height: 575px;
   margin: auto;
+  outline: none;
+  border: none;
 }
 
 #display {
@@ -17,6 +19,7 @@ body {
   padding: 20px;
   font-size: 35px;
   font-family: Arial;
+  text-align: right;
 }
 
 .num {
@@ -26,16 +29,17 @@ body {
 }
 
 .num:hover {
-  background-color: coral;
+  background-color: #ff6f59;
 }
 
 .num:active {
-  background-color: #FF6F59
+  background-color: #fa9387;
 }
+
 .oper {
   border: none;
   outline: none;
-  background-color: lightblue;
+  background-color: #B2D6FF;
   font-size: 30px;
 }
 
@@ -47,18 +51,23 @@ body {
   background-color: grey;
 }
 
+.oper:focus {
+  background-color: lightslategrey;
+}
+
 #decimal {
   outline: none;
   border: none;
   font-size: 40px;
+  padding-bottom: 15px;
 }
 
 #decimal:hover {
-  background-color: coral;
+  background-color: #ff6f59;
 }
 
 #decimal:active {
-  background-color: #FF6F59;
+  background-color: #fa9387
 }
 
 #equals {
@@ -68,11 +77,11 @@ body {
 }
 
 #equals:hover {
-  background-color: coral;
+  background-color: #ff6f59;
 }
 
 #equals:active {
-  background-color: #FF6F59;
+  background-color: #fa9387
 }
 
 #divide {
@@ -99,11 +108,11 @@ body {
 }
 
 #backspace:hover {
-  background-color: coral;
+  background-color: #ff6f59;
 }
 
 #backspace:active {
-  background-color: #FF6F59;
+  background-color: #fa9387
 }
 
 #clears {
@@ -114,18 +123,9 @@ body {
 }
 
 #clears:hover {
-  background-color: coral;
+  background-color: #ff6f59;
 }
 
 #clears:active {
-  background-color: #FF6F59;
-}
-
-h1 {
-  text-align: center;
-  margin: auto;
-  color: white;
-  font-size: 35px;
-  font-family: Arial;
-  font-weight: Bold;
+  background-color: #fa9387;
 }
