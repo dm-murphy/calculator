@@ -1,78 +1,131 @@
-/* #container {
-color: white;
-margin: auto;
-width: 630px;
-display: grid;
-grid-template-columns: 500px
- repeat(16, 1fr);
-grid-template-rows: repeat(8, 1fr);
-} */
-
-/* .test {
-  background-color: coral;
-  outline: solid 2px black;
-  color: white;
+body {
+  background-color: lightskyblue;
 }
 
-#display {
-    background-color: lightgrey;
-
-} */
-
-/* .container {
-    display: grid;
-    
-    width: 650px;
-    margin: auto;
-    
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas:   
-    "header header header header"
-    "main main main sidebar"
-    "main main main sidebar"
-    "main main main sidebar"
-    "main main main sidebar"
-    "main main main sidebar"
-  }
-
-#display {
-    grid-area: header;
-    background-color: lightgrey;
-  }
-.test {
-    grid-area: main;
-    background-color: coral;
-    
-    
-  }
-.oper {
-    grid-area: sidebar;
-  } */
-  
 #container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  outline: solid 5px;
-  grid-gap: 5px;
-  border: solid 1px;
+  width: 450px;
+  height: 575px;
+  margin: auto;
 }
 
 #display {
-  grid-column-start: 1;
-  grid-column-end: 5;
-  background-color: lime;;
+  grid-area: 1 / 1 / 2 / 5;
+  background-color: white;
+  padding: 20px;
+  font-size: 35px;
+  font-family: Arial;
 }
 
-.test {
-  grid-column-start: 1;
-  grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 6;
+.num {
+  border: none;
+  outline: none;
+  font-size: 30px;
+}
+
+.num:hover {
   background-color: coral;
 }
 
+.num:active {
+  background-color: #FF6F59
+}
 .oper {
-    background-color: blue;
+  border: none;
+  outline: none;
+  background-color: lightblue;
+  font-size: 30px;
+}
+
+.oper:hover {
+  background-color: lightslategrey;
+}
+
+.oper:active {
+  background-color: grey;
+}
+
+#decimal {
+  outline: none;
+  border: none;
+  font-size: 40px;
+}
+
+#decimal:hover {
+  background-color: coral;
+}
+
+#decimal:active {
+  background-color: #FF6F59;
+}
+
+#equals {
+  outline: none;
+  border: none;
+  font-size: 30px;
+}
+
+#equals:hover {
+  background-color: coral;
+}
+
+#equals:active {
+  background-color: #FF6F59;
+}
+
+#divide {
+  grid-area: 2 / 4 / 3 / 5;
+}
+
+#multiply {
+  grid-area: 3 / 4 / 4 / 5;
+}
+
+#subtract {
+  grid-area: 4 / 4 / 5 / 5;
+}
+
+#add {
+  grid-area: 5 / 4 / 6 / 5;
+}
+
+#backspace {
+  grid-area: 6 / 1 / 7 / 3;
+  border: none;
+  outline: none;
+  font-size: 30px;
+}
+
+#backspace:hover {
+  background-color: coral;
+}
+
+#backspace:active {
+  background-color: #FF6F59;
+}
+
+#clears {
+  grid-area: 6 / 3 / 7 / 5;
+  border: none;
+  outline: none;
+  font-size: 30px;
+}
+
+#clears:hover {
+  background-color: coral;
+}
+
+#clears:active {
+  background-color: #FF6F59;
+}
+
+h1 {
+  text-align: center;
+  margin: auto;
+  color: white;
+  font-size: 35px;
+  font-family: Arial;
+  font-weight: Bold;
 }

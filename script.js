@@ -12,7 +12,6 @@ clearMe();
 decimalize();
 backSpace();
 
-
 const display = document.querySelector('#display');
 display.textContent = "0";
 
@@ -120,8 +119,8 @@ function equalize() {
 
 function equalsClick(e) {
   if ((operatorVariable == "/") && (calcString == 0)) {
-    console.log("You want to divide by zero?");
-    display.textContent = "You want to divide by zero?";
+    console.log("DIVIDE BY ZERO?");
+    display.textContent = "DIVIDE BY ZERO?";
     disableButtons();
   } else if (operatorVariable != undefined) {
     currentValue = operate(operatorVariable, num1, Number(calcString));
@@ -149,6 +148,7 @@ function decimalClick(e) {
   }
 }
 
+// Functions to disable and enable buttons 
 
 function disableButtons() {
   const equalButton = document.querySelector('#equals');
@@ -200,10 +200,3 @@ function clearsClick() {
   decimalStatus = undefined;
   enableButtons();
 }
-
-// Add keyboard support
-
-// Styling:
-
-// Instead of showing the operator in the display. How about like online-calculator app, you keep the operator button highlighted? Once
-// a second number is selected after the operator, turn off the highlighted operator button. 
