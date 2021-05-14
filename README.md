@@ -1,4 +1,4 @@
-An attempt at the culminating project in the Web Development 101 course for The Odin Project: https://www.theodinproject.com/courses/web-development-101/lessons/calculator
+The culminating project in the Foundations course for The Odin Project: https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/calculator
 
 This calculator project showcases the lessons in JavaScript, HTML and CSS.
 
